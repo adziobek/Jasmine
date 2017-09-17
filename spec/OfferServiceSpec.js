@@ -62,4 +62,43 @@ describe('OfferService', function () {
             expect(this.names).toContain(this.selectedName);
         });
     });
+
+    describe('test nested describe block', function () {
+        beforeEach(function () {
+            console.log('outer beforeEach invoke');
+        });
+        afterEach(function () {
+            console.log('outer afterEach invoke');
+        });
+
+        it('outer spec', function () {
+            console.log('outer spec invoke');
+            expect().nothing();
+        });
+
+        describe('nested describe block', function () {
+            beforeEach(function () {
+                console.log('   nested beforeEach invoke');
+            });
+            afterEach(function () {
+                console.log('   nested afterEach invoke');
+            });
+
+            it('nested spec', function () {
+                console.log('   nested spec invoke');
+                expect().nothing();
+            });
+        });
+
+        /* Result
+         OfferServiceSpec.js:68 outer beforeEach invoke
+         OfferServiceSpec.js:75 outer spec invoke
+         OfferServiceSpec.js:71 outer afterEach invoke
+         OfferServiceSpec.js:68 outer beforeEach invoke
+         OfferServiceSpec.js:81    nested beforeEach invoke
+         OfferServiceSpec.js:88    nested spec invoke
+         OfferServiceSpec.js:84    nested afterEach invoke
+         OfferServiceSpec.js:71 outer afterEach invoke
+         */
+    });
 });

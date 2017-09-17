@@ -35,3 +35,9 @@ this.execute = function(runnablesToRun) {
       runnablesToRun = [topSuite.id]; // brak focused i odpalane pozostałe
     }
   }
+
+* Co się będzie działo gdy zagnieździmy blok describe?
+Dla każdego spec z zagnieżdzonego bloku zostanie uruchomiona metoda beforeEach, afterEach zarówno
+z describe w którym się znajduje jak i describe w którym jest zagnieżdzony.
+
+
