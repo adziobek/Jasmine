@@ -113,7 +113,7 @@ describe('OfferService', function () {
 
     it('pending spec without function');
 
-    describe("A spy", function () {
+    describe('A spy', function () {
         var foo, bar = null;
 
         beforeEach(function () {
@@ -131,18 +131,18 @@ describe('OfferService', function () {
         });
 
 
-        it("tracks that the spy was called", function () {
+        it('tracks that the spy was called', function () {
             expect(foo.setBar).toHaveBeenCalled();
         });
-        it("tracks that the spy was called x times", function () {
+        it('tracks that the spy was called x times', function () {
             expect(foo.setBar).toHaveBeenCalledTimes(2);
         });
-        it("tracks all the arguments of its calls", function () {
+        it('tracks all the arguments of its calls', function () {
             expect(foo.setBar).toHaveBeenCalledWith(123);
             expect(foo.setBar).toHaveBeenCalledWith(456, 'another param');
         });
 
-        it("stops all execution on a function", function () {
+        it('stops all execution on a function', function () {
             expect(bar).toBeNull();
         });
     });
