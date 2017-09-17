@@ -157,6 +157,18 @@ describe('OfferService', function () {
                 setCustomerData: function (firstName, lastName) {
                     this.firstName = firstName;
                     this.lastName = lastName;
+                },
+                getCustomerData: function () {
+                    return {
+                        firstName: this.firstName,
+                        lastName: this.lastName
+                    }
+                },
+                getCustomerFirstName: function () {
+                    return this.firstName;
+                },
+                getCustomerLastName: function () {
+                    return this.lastName;
                 }
             }
         });
@@ -168,6 +180,45 @@ describe('OfferService', function () {
             customer.setCustomerData('Jacek', 'Balcerzak');
             //then
             expect(customer.firstName).toEqual('Jacek');
-        })
+            expect(customer.getCustomerData()).toEqual({firstName: 'Jacek', lastName: 'Balcerzak'})
+        });
+
+        it('should get fake customer data', function () {
+            // given
+            spyOn(customer, 'setCustomerData')
+                .and
+                .callThrough();
+            spyOn(customer, 'getCustomerData')
+                .and
+                .returnValue({firstName: 'NieJacek', lastName: 'NieBalcerzak'}); //fake return customer data
+            spyOn(customer, 'getCustomerFirstName')
+                .and
+                .returnValues('Andrzej', 'Marta', 'John');
+            //when
+            customer.setCustomerData('Jacek', 'Balcerzak');// set customer data
+            //then
+            expect(customer.getCustomerData()).toEqual({firstName: 'NieJacek', lastName: 'NieBalcerzak'})
+
+            expect(customer.getCustomerFirstName()).toEqual('Andrzej');
+            expect(customer.getCustomerFirstName()).toEqual('Marta');
+            expect(customer.getCustomerFirstName()).toEqual('John');
+        });
+
+        it('should call fake getCustomerLastName method', function () {
+            // given
+            var fakeGetCustomerLastName = function () {
+                return 'Heheszek';
+            };
+            spyOn(customer, 'setCustomerData')
+                .and
+                .callThrough();
+            spyOn(customer, 'getCustomerLastName')
+                .and
+                .callFake(fakeGetCustomerLastName);
+            //when
+            customer.setCustomerData('Jacek', 'Balcerzak');
+            //then
+            expect(customer.getCustomerLastName()).toEqual('Heheszek');
+        });
     });
 });

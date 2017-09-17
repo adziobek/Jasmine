@@ -55,6 +55,8 @@ wywoływana i z jakim parametrami.
 Aby ciało metody zostało wykonane należy spy założyć na metodę:
 spyOn(foo, 'getBar').and.callThrough();
 
+*Czy  .and.returnValue(745); powoduje wykonanie się ciała metody?
+Nie, powoduje jedynie zwrócenie fake wyniku.
 
 
 
