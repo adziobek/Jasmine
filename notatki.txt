@@ -40,4 +40,8 @@ this.execute = function(runnablesToRun) {
 Dla każdego spec z zagnieżdzonego bloku zostanie uruchomiona metoda beforeEach, afterEach zarówno
 z describe w którym się znajduje jak i describe w którym jest zagnieżdzony.
 
-
+* Co znaczy że test jest pending?
+Oznacza to że nie zostanie uruchomiony ale będzie widoczny w rezultatach.
+Można to osiągnąć używająć:
+xdescribe - wszystkie spec z danego xdescribe będą pending
+xit - pojedyńczy test jest pending

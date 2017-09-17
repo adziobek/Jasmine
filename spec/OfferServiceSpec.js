@@ -101,4 +101,16 @@ describe('OfferService', function () {
          OfferServiceSpec.js:71 outer afterEach invoke
          */
     });
+
+    xit('xit pending spec -> ', function () {
+        expect().nothing();
+    });
+
+    it('pending() spec -> ', function () {
+        expect().nothing();
+        pending('invoke pending method in spec function body');
+    });
+
+    it('pending spec without function');
+
 });
