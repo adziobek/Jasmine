@@ -146,4 +146,28 @@ describe('OfferService', function () {
             expect(bar).toBeNull();
         });
     });
+
+    describe('A spy with callThrough', function () {
+        var customer = null;
+
+        beforeEach(function () {
+            customer = {
+                firstName: null,
+                lastName: null,
+                setCustomerData: function (firstName, lastName) {
+                    this.firstName = firstName;
+                    this.lastName = lastName;
+                }
+            }
+        });
+
+        it('should set customer data', function () {
+            // given
+            spyOn(customer, 'setCustomerData').and.callThrough();
+            //when
+            customer.setCustomerData('Jacek', 'Balcerzak');
+            //then
+            expect(customer.firstName).toEqual('Jacek');
+        })
+    });
 });

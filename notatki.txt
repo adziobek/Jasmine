@@ -45,3 +45,18 @@ Oznacza to że nie zostanie uruchomiony ale będzie widoczny w rezultatach.
 Można to osiągnąć używająć:
 xdescribe - wszystkie spec z danego xdescribe będą pending
 xit - pojedyńczy test jest pending
+
+* Co zrobić gdy sekcja given i then w testach się powtarza?
+Wyłączyć ją do metody beforeEach()
+
+* Czy body methody która zostaje zastąpiona spy jest wykonywane?
+Nie, ciało metody nie jest wykonywane. Dzięki spy można sprawdzić czy metoda jest wywoływana, ile razy jest
+wywoływana i z jakim parametrami.
+Aby ciało metody zostało wykonane należy spy założyć na metodę:
+spyOn(foo, 'getBar').and.callThrough();
+
+
+
+
+
+
