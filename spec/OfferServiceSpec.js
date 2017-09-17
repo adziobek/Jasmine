@@ -32,4 +32,21 @@ describe('OfferService', function () {
         expect('marcin').toContain('cin');
         expect(names).toContain('magda');
     });
+
+    //Spy use
+
+    it('should calculate offer properly', function () {
+        // given
+        spyOn(offer, 'calculatePremium');
+        spyOn(offer, 'addClient');
+        spyOn(offer, 'isSumAssuredValid');
+        // when
+        offerService.calculateOffer(offer, client);
+
+        //then
+        expect(offer.calculatePremium).toHaveBeenCalled();
+        expect(offer.addClient).toHaveBeenCalledWith(client);
+        expect(offer.isSumAssuredValid).toHaveBeenCalledBefore(offer.calculatePremium);
+        expect(offer.addClient).toHaveBeenCalledTimes(1);
+    })
 });

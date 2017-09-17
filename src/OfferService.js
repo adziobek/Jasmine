@@ -1,12 +1,9 @@
 function OfferService() {
-
 }
 
-OfferService.prototype.createOffer = function () {
-
-};
-
-OfferService.prototype.calculateOffer = function () {
-
+OfferService.prototype.calculateOffer = function (offer, client) {
+    offer.addClient(client);
+    offer.isSumAssuredValid();
+    offer.calculatePremium();
 };
 
