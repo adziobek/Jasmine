@@ -51,4 +51,15 @@ describe('OfferService', function () {
         expect(offer.addClient).not.toHaveBeenCalledTimes(0);
         expect(offer).not.toBeNull();
     });
+
+    describe('use this keyword to share variable', function () {
+        beforeEach(function () {
+            this.names = ['marcin', 'kasia', 'mietek'];
+            this.selectedName = 'marcin';
+        });
+
+        it('names should contain selected name', function () {
+            expect(this.names).toContain(this.selectedName);
+        });
+    });
 });
