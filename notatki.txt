@@ -1,0 +1,37 @@
+* Jak można zmienić konfigurację Jasmine?
+Można to zrobić dodając plik .travis.yml do projektu.
+
+* Jak sprawdzić ile czasu zajeło wykonanie wszystkich testow?
+window.jsApiReporter.executionTime() w konsoli
+
+* Jakie javascripty są potrzebne i do czego?
+jasmine.js      - główna funkcjonalność
+jasmine-html.js - tworzy htmla z podsumowaniem testów
+jasmine.css     - style do formatowania htmla
+boot.js         - odpowiada za załadowanie i uruchomienie testów
+console.js      - zawiera ConsoleReporter, który może logować na konsolę wyniki testów
+
+Domyślnie za pokazywanie wyników testów jest odpowiedzialny HTMLReporter.
+Reportera którego chcemy używać ustawia się w pliku boot.js
+  env.addReporter(jasmineInterface.jsApiReporter);
+  env.addReporter(htmlReporter);
+
+* Co oznaczają pojęcia suite test, spec, describe, it?
+unit test - test jednostkowy, testuje kawałek kodu
+spec - test jednostkowy, skrót od specification, testuje techniczną implementacje
+test suite - zestaw testów testujących daną funckjonalność
+describe = test suite - zestaw testów w Jasmine
+it = spec = unit test - pojedyńczy test w Jasmine
+
+* Czym się różnią testy focus od zwykłych fdescribe vs. describe, fit vs. it
+Jeśli w projekcie są jakieś testy(fit) lub zestawy testów(fdescribe) focused
+to są one odpalane, a pozostałe testy nie.
+
+this.execute = function(runnablesToRun) {
+  if(!runnablesToRun) {
+    if (focusedRunnables.length) {
+      runnablesToRun = focusedRunnables; // odpalane testy focused
+    } else {
+      runnablesToRun = [topSuite.id]; // brak focused i odpalane pozostałe
+    }
+  }
