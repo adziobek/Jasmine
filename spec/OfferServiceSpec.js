@@ -48,5 +48,7 @@ describe('OfferService', function () {
         expect(offer.addClient).toHaveBeenCalledWith(client);
         expect(offer.isSumAssuredValid).toHaveBeenCalledBefore(offer.calculatePremium);
         expect(offer.addClient).toHaveBeenCalledTimes(1);
-    })
+        expect(offer.addClient).not.toHaveBeenCalledTimes(0);
+        expect(offer).not.toBeNull();
+    });
 });
