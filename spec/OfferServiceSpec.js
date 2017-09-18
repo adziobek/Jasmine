@@ -292,5 +292,21 @@ describe('OfferService', function () {
             //then
             expect(calculateVatSpy).toHaveBeenCalledWith(1200, jasmine.anything());
         });
+
+        it('should use jasmine.stringMatching to check method call', function () {
+            // given
+            var calculateOffer = function (offerType) {
+            };
+            var calculateOfferSpy = jasmine.createSpy('calculateOffer', calculateOffer);
+
+            //when
+            calculateOfferSpy('GiOffer');
+            calculateOfferSpy('HHOffer');
+            calculateOfferSpy('LifeOffer');
+
+            //then
+            expect(calculateOfferSpy).toHaveBeenCalledWith(jasmine.stringMatching('Offer'));
+            expect(calculateOfferSpy.calls.count()).toEqual(3);
+        });
     });
 });
