@@ -246,6 +246,12 @@ describe('OfferService', function () {
             expect(customer.getCustomerLastName()).toBeNull();
         });
 
+        it('should test jasmine.createSpy', function () {
+            var spyMethod = jasmine.createSpy('spyMethod');
+            spyMethod('test', 'spy', 'method');
 
+            expect(spyMethod).toHaveBeenCalled();
+            expect(spyMethod).toHaveBeenCalledWith('test', 'spy', 'method');
+        });
     });
 });
