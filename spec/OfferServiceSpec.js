@@ -295,9 +295,7 @@ describe('OfferService', function () {
 
         it('should use jasmine.stringMatching to check method call', function () {
             // given
-            var calculateOffer = function (offerType) {
-            };
-            var calculateOfferSpy = jasmine.createSpy('calculateOffer', calculateOffer);
+            var calculateOfferSpy = jasmine.createSpy('calculateOffer');
 
             //when
             calculateOfferSpy('GiOffer');
@@ -308,5 +306,6 @@ describe('OfferService', function () {
             expect(calculateOfferSpy).toHaveBeenCalledWith(jasmine.stringMatching('Offer'));
             expect(calculateOfferSpy.calls.count()).toEqual(3);
         });
+
     });
 });
