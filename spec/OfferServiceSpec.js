@@ -253,5 +253,44 @@ describe('OfferService', function () {
             expect(spyMethod).toHaveBeenCalled();
             expect(spyMethod).toHaveBeenCalledWith('test', 'spy', 'method');
         });
+
+        it('should test jasmine.createSpyObj', function () {
+            var spyObject = jasmine.createSpyObj('spyObject', ['playM', 'pauseM', 'stopM']);
+
+            spyObject.playM();
+            spyObject.pauseM();
+            spyObject.stopM();
+
+
+            expect(spyObject.playM).toHaveBeenCalled();
+            expect(spyObject.pauseM).toHaveBeenCalled();
+            expect(spyObject.stopM).toHaveBeenCalled();
+        });
+
+        it('should check if method result is a Number with jasmine.any', function () {
+            // given
+            var spyMethod = jasmine.createSpy('spyMethod');
+            spyMethod
+                .and
+                .returnValue(12);
+            //when
+            var result = spyMethod('test');
+            //then
+            expect(result).toEqual(jasmine.any(Number));
+            expect(spyMethod).toHaveBeenCalledWith(jasmine.any(String));
+        });
+
+        it('should check spy method parameter match with jasmine.anything', function () {
+            // given
+            var calculateVat = function (sum, vat) {
+                return sum * vat;
+            };
+            var calculateVatSpy = jasmine.createSpy('calculateVat', calculateVat);
+
+            //when
+            calculateVatSpy(1200, 0.23);
+            //then
+            expect(calculateVatSpy).toHaveBeenCalledWith(1200, jasmine.anything());
+        });
     });
 });
