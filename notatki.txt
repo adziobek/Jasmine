@@ -55,10 +55,49 @@ wywoływana i z jakim parametrami.
 Aby ciało metody zostało wykonane należy spy założyć na metodę:
 spyOn(foo, 'getBar').and.callThrough();
 
-*Czy  .and.returnValue(745); powoduje wykonanie się ciała metody?
+* Czy  .and.returnValue(745); powoduje wykonanie się ciała metody?
 Nie, powoduje jedynie zwrócenie fake wyniku.
 
+* Jakie jest domyśle działanie Spy?
+Domyślnie Spy jest wywoływany ale nic nie robi, nic nie zwraca. Zawdzięcza to stub.
 
+/**
+ * Tell the spy to do nothing when invoked. This is the default.
+ * @name Spy#and#stub
+ * @function
+ */
+this.stub = function(fn) {
+  plan = function() {};
+  return getSpy();
+};
+
+Wywołanie and.stub() powoduje powrót domyślnego działania spy na metodzie(spy nie będzie nic zwracał, wywoływał ciało metody ectr)
+
+* Jakie mamy rodzaje funkcji do przetestowania?
+- funkcje bez efektów ubocznych - ich rezultat zależy wyłącznie od przekazanych im parametrów, argumentów
+np. String.toLowerCase
+- funckje z efektami ubocznymi - ich rezulatat zależy od czego zewnętrzengo co może się zmieniać, np. czasu,
+zapytania do bazy danych
+np. Database.save()
+
+* Kiedy używamy test doubles: Spy, Stub, Mock?
+- wtedy gdy funkcja ma side effecty
+- gdy sprawia problemy podczas testów, np. długo się wykonuje
+
+* Kiedy używamy Spy?
+Spy dostarcza informacji o wywołaniu fukcji, czy była wywołana, ile razy była wywołana, z jakimi argumentami,
+co zwróciła.
+
+
+* Kiedy używamy Stub?
+Stub zastępuje testowaną fukcję. Może być użyty by zastąpić problematyczny kod, np.
+wywołanie metody zapisujacej coś w bazie danych:
+sinon.stub(Database, 'save')
+
+* Kiedy używamy Mock?
+Wtedy gdy chcemy przetestować wiele asercji i nie pisać wiele expectów.
+ database.expects('save').once().withArgs(expectedUser);
+ database.verify();
 
 
 

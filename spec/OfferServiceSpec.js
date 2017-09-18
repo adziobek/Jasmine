@@ -169,6 +169,10 @@ describe('OfferService', function () {
                 },
                 getCustomerLastName: function () {
                     return this.lastName;
+                },
+                resetData: function () {
+                    this.firstName = null;
+                    this.lastName = null;
                 }
             }
         });
@@ -220,5 +224,28 @@ describe('OfferService', function () {
             //then
             expect(customer.getCustomerLastName()).toEqual('Heheszek');
         });
+
+        it('should use and.stub to retrieve default spy behaviour', function () {
+            // given
+            spyOn(customer, 'setCustomerData')
+                .and
+                .callThrough();
+            //when
+            customer.setCustomerData('Jacek', 'Balcerzak');
+            //then
+            expect(customer.getCustomerFirstName()).toEqual('Jacek');
+            expect(customer.getCustomerLastName()).toEqual('Balcerzak');
+
+            // given
+            customer.resetData();
+            customer.setCustomerData.and.stub();
+            // when
+            customer.setCustomerData('Jacek', 'Balcerzak');
+            // then
+            expect(customer.getCustomerFirstName()).toBeNull();
+            expect(customer.getCustomerLastName()).toBeNull();
+        });
+
+
     });
 });
